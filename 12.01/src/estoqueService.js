@@ -13,10 +13,8 @@ export async function buscarProdutoPorId(produtoId) {
 
 // Buscando produtos de limpeza (todos)
 export async function buscarProdutos(produto) {
-    const [rows] = await pool.query('SELECT * from produto',
-        [produtoId]
-    )
-    return rows[0]
+    const [rows] = await pool.query('SELECT * from produto')
+    return rows
 }
 
 // Cadastrando novo produto de limpeza
