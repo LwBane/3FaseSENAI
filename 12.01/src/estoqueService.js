@@ -56,8 +56,10 @@ export async function cadastrarProduto(
 }
 
 // Consultar todas as saídas de produtos, apresentadas em ordem descrescente por data 
+export async function consultarSaidasProdutos() {}
 
-// Registrar entradas de itens no estoque 
+// Registrar entradas de itens no estoque
+export async function registrarEntradaProduto(){}
 
 // Penúltimo item... Receber uma data inicial e uma final...
 export async function produtoMaiorSaidaNoPeriodo(dataInicial, dataFinal) {
