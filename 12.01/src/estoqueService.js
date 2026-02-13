@@ -59,9 +59,7 @@ export async function cadastrarProduto(
 
 // Registrar entradas de itens no estoque 
 
-// Identificar produtos que tenham atingido os limites mínimo e máximo estabelecidos 
-
-// 
+// Penúltimo item... Receber uma data inicial e uma final...
 export async function produtoMaiorSaidaNoPeriodo(dataInicial, dataFinal) {
     const [rows] = await pool.query(`SELECT p.id AS produto_id, 
         p.nome AS produto, 
@@ -87,3 +85,6 @@ export async function produtoMaiorSaidaNoPeriodo(dataInicial, dataFinal) {
         };
     });
 }
+
+// Identificar produtos que tenham atingido os limites mínimo e máximo estabelecidos 
+export async function produtosAtingiramLimites() {}
