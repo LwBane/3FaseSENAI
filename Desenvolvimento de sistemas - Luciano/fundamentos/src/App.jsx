@@ -1,11 +1,18 @@
+import Body from "./layouts/Body/Body"
+import {Footer} from "./layouts/Footer/Footer"
+import Header from "./layouts/Header"
+
 function App() {
 
 
   return (
     <>
-      <h1></h1>
+      <Header title="Nome do site"/>
+      <Body />
+      <Footer name="Emilie"/>
     </>
   )
 }
 
 export default App
+

@@ -1,0 +1,11 @@
+.footer{
+    background: #142331;
+    color: #FFF;
+    padding: 20px;
+    text-align: center;
+
+    .name{
+        font-size: 20px;
+        color: white;
+    }
+}
