@@ -19,7 +19,7 @@ export const createUser = (userData) => {
         id: Math.floor(Math.random() * 1000000),
         name: userData.name,
         age: userData.age,
-        isActive: userData.true,
+        isActive: true,
         roles: ['user']
     };
     return newUser;

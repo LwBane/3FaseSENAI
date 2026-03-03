@@ -4,14 +4,17 @@
   "type": "module",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.js"
-  },
+    "scripts": {
+      "test": "node --experimental-vm-modules node_modules/jest-cli/bin/jest.js",
+      "start": "node src/server.js"
+    },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
   }
 }
