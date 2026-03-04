@@ -8,3 +8,35 @@
 //Quando empilha ?
 //Quando desempilha ?
 //Como detecta erro ?
+
+// Atividade de pilha (Stack - LIFO --> Primeiro que entra, último que sai)
+
+function validarBalanceamento(expressao){
+    const pilha = [];
+    const pares = { // pares de abertura e fechamento, qual corresponde a qual
+        ")": "(", 
+        "]": "[",
+        "}": "{"
+    }
+
+    const quemAbre = new Set(["(", "[", "{"]); // array de conjunto dos que abrem alguma expressão / set serve para não duplicar as coisas 
+    
+
+    for (const caractere of expressao) {
+        if(quemAbre.has(caractere)) pilha.push(caractere)
+        else if(caractere in pares){
+            if(pilha.length === 0) return false // alguma coisa foi aberta sem o usuário saber
+            const topo = pilha.pop() // o pop vai retirar o último elemento da pilha
+            if(topo !== pares[caractere]) return false // se quem estiver no topo for diferente, significa que tem algo de errado, então retorna como falso
+        }
+    }
+    return pilha.length === 0; 
+}
+
+// Anotações a mais:
+// mas ent tipo ele pega meu console log com a expressão, dai pega o topo, o ultimo parenteses q eu coloquei e fala, ah, se for diferente do correspondente q vc atribuiu em pares, retorna como false
+
+// Testando 
+
+console.log(validarBalanceamento("((a + b) * c)")) // true 
+console.log(validarBalanceamento("((a + b] * c)")) // false
