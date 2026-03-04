@@ -13,6 +13,7 @@
 
 function validarBalanceamento(expressao){
     const pilha = [];
+    let topoPilha = 0 // expectativa é que no fim termine em 0 também, para dar certo
     const pares = { // pares de abertura e fechamento, qual corresponde a qual
         ")": "(", 
         "]": "[",
@@ -23,18 +24,22 @@ function validarBalanceamento(expressao){
     
 
     for (const caractere of expressao) {
-        if(quemAbre.has(caractere)) pilha.push(caractere)
+        if(quemAbre.has(caractere)) {
+            pilha[topoPilha] = caractere
+            topoPilha++ // topo da pilha passa a ser o próximo que adicionei 
+        }
         else if(caractere in pares){
             if(pilha.length === 0) return false // alguma coisa foi aberta sem o usuário saber
-            const topo = pilha.pop() // o pop vai retirar o último elemento da pilha
-            if(topo !== pares[caractere]) return false // se quem estiver no topo for diferente, significa que tem algo de errado, então retorna como falso
+
+            const topo = pilha[topoPilha-1] // como acrescentei mais antes, tenho que decrementar pra saber o topo de vdd 
+            pilha[topoPilha] = undefined
+            topoPilha-- 
+            if (topo !== pares[caractere]) return false // se quem estiver no topo for diferente, significa que tem algo de errado, então retorna como falso // Se o topo (último que abriu) não for o correspondente correto para o fechamento atual (quem está fechando), a função retorna false. 
         }
     }
-    return pilha.length === 0; 
+    return topoPilha === 0; 
 }
 
-// Anotações a mais:
-// mas ent tipo ele pega meu console log com a expressão, dai pega o topo, o ultimo parenteses q eu coloquei e fala, ah, se for diferente do correspondente q vc atribuiu em pares, retorna como false
 
 // Testando 
 

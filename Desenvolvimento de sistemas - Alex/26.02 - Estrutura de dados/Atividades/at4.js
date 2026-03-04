@@ -9,19 +9,10 @@ function inverterTexto(texto) {
     // Criamos a pilha
     const pilha = []
 
-    // Empilhar cada caractere
-    for (let i = 0; i < texto.length; i++) {
-        pilha.push(texto[i])
-    }
+    for (letra of texto) pilha.push(letra)
 
-    // String que vai guardar o resultado invertido
     let invertido = ""
-
-    // Desempilhar até esvaziar
-    while (pilha.length > 0) {
-        invertido += pilha.pop()
-    }
-
+    while (pilha.length) invertido +=pilha.pop()
     return invertido
 }
 
@@ -30,3 +21,21 @@ function inverterTexto(texto) {
 console.log(inverterTexto("1,2,3")) // 3,2,1
 console.log(inverterTexto("casa"))  // asac
 console.log(inverterTexto("banana"))    // ananab
+
+
+// Outro jeito
+
+// // Empilhar cada caractere
+// for (let i = 0; i < texto.length; i++) {
+//     pilha.push(texto[i])
+// }
+
+// // String que vai guardar o resultado invertido
+// let invertido = ""
+
+// // Desempilhar até esvaziar
+// while (pilha.length > 0) {
+//     invertido += pilha.pop()
+// }
+
+// return invertido
