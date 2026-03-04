@@ -1,3 +1,13 @@
+// Exercício 1 — Simulador de Atendimento
+// Objetivo: Implementar fila usando array.
+//     Enunciado
+// Implemente uma fila com operações:
+// enqueue(valor)
+// dequeue()
+// peek()
+// isEmpty()
+// Simule um sistema de atendimento bancário.
+
 class Queue {
 
     constructor() {

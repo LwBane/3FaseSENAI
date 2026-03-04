@@ -1,3 +1,12 @@
+// Exercício 2 — Fila com Prioridade Simples
+// Implemente uma fila onde:
+// Idosos entram antes
+// Demais entram ao final
+// Discussão
+// Você está mantendo ordenação ?
+// Está inserindo no meio ?
+
+
 class Queue {
 
     constructor() {
