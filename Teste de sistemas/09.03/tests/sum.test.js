@@ -31,7 +31,7 @@ test('Dois objetos iguais', () => {
 test('testando a função de nomes', () => {
     try {
         nome('Senai')
-        throw new Error("O teste falhou porque a função nao retornou erro");
+        throw new Error("O teste falhou porque a função não retornou erro");
     } catch (error) {
         expect(error.message).toBe("Nome inválido")
     }
