@@ -1,38 +1,28 @@
-import { nome } from "./nome"
-import { sum } from "./sum"
+import createUser from "../src/userService.js";
 
-test('Soma de 2+2 valores', () => {
-    expect(2 + 2).toBe(4)
-})
+// Deve criar um usuário válido com todos os campos corretos
+test("Teste de criar um usuário válido", () => {
+    const userData = { name: "Carlos Mendes", age: 25 };
 
-const obj1 = {
-    nome: 'teste',
-    idade: 12
-}
+    const user = createUser(userData);
 
-const obj2 = {
-    nome: 'teste',
-    idade: 12
-}
+    expect(user.name).toBe("Carlos Mendes");
+    expect(user.age).toBe(25);
+    expect(user.isActive).toBe(true);
+    expect(user.roles).toEqual(['user']); 
+    expect(user.id).toBeDefined();
+});
 
+// Deve lançar erro quando o nome não for informado
+test("Teste de lançar erro ao criar usuário sem nome", () => {
+    const userData = { age: 30 };
 
-test('Dois objetos iguais', () => {
-    expect(obj1).toEqual(obj2)
-})
+    expect(() => createUser(userData)).toThrow("O nome do usuário é obrigatório.");
+});
 
-// test('testando a função soma externa', () => {
-//     expect(() => sum(2,'a')).toThrow('Os valores precisam ser numericos')
-// })
+// Deve lançar erro quando o usuário for menor de idade
+test("Teste de lançar erro ao criar usuário menor de idade", () => {
+    const userData = { name: "Beatriz Lima", age: 15 };
 
-// test('testando a função de nomes', () => {
-//     expect(() => nome('Senai')).toThrow('Nome inválido')
-// })
-
-test('testando a função de nomes', () => {
-    try {
-        nome('Senai')
-        throw new Error("O teste falhou porque a função não retornou erro");
-    } catch (error) {
-        expect(error.message).toBe("Nome inválido")
-    }
-})
+    expect(() => createUser(userData)).toThrow("O usuário deve ser maior de idade.");
+});
