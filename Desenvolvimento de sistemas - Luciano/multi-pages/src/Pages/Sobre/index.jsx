@@ -5,9 +5,7 @@ import { Footer } from "../../layouts/Footer";
 export const Sobre = () => {
   return (
   <>
-  <Header />
     <div>Sobre</div>
-    <Footer /> 
   </>
   )
 };
