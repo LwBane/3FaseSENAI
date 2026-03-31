@@ -11,6 +11,7 @@ import { Sobre } from "./Pages/Sobre";
 import { AuthProvider } from "./context/AuthContext";
 import Login from "./Pages/Login";
 import Blog from "./Pages/Blog";
+import PostDetail from "./Pages/Blog/PostDetail";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,11 @@ const router = createBrowserRouter([
       {
         path: "blog",
         element: <Blog />,
+      },
+
+       {
+        path: "post/:id",     // quando coloca esses ":" você informa que a rota é dinâmica
+        element: <PostDetail />,
       },
     ],
   },
