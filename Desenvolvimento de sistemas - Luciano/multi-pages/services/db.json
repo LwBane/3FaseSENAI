@@ -36,13 +36,16 @@
       "views": 270
     }
   ],
+
   "comments": [
     { "id": "1", "text": "a comment about post 1", "postId": "1" },
     { "id": "2", "text": "another comment about post 1", "postId": "1" }
   ],
+
   "profile": {
     "name": "typicode"
   },
+
   "users": [
     {
       "id": "1",
@@ -54,5 +57,55 @@
       "name": "Maria",
       "idade": "24"
     }
-  ]
+  ],
+
+  "autores": [
+  {
+    "id": 1,
+    "nome": "Luna Silva",
+    "foto": "https://placehold.co/300x300",
+    "descricao": "Exploradora de mundos mágicos e sonhadora incansável.",
+    "biografia": "Luna é uma jovem curiosa que descobre portais secretos para universos encantados. Em suas jornadas, aprende sobre coragem, empatia e o poder da imaginação.",
+    "especialidade": "Fantasia",
+    "cidade": "Vale dos Sonhos",
+    "idade": 13,
+    "obras": ["O Portal das Estrelas", "A Cidade Invisível"]
+  },
+  {
+    "id": 2,
+    "nome": "Clara Ventura",
+    "foto": "https://placehold.co/300x300",
+    "descricao": "Aventureira que viaja entre dimensões desconhecidas.",
+    "biografia": "Clara é uma adolescente que encontra um artefato misterioso capaz de transportá-la para diferentes realidades. Sua jornada é marcada por desafios e descobertas pessoais.",
+    "especialidade": "Aventura",
+    "cidade": "Rio de Janeiro / Multiverso",
+    "idade": 15,
+    "obras": ["Entre Mundos", "Horizontes Paralelos"]
+  },
+  {
+    "id": 3,
+    "nome": "Beatriz Monteiro",
+    "foto": "https://placehold.co/300x300",
+    "descricao": "Jovem perspicaz que questiona as tradições da sociedade.",
+    "biografia": "Beatriz é conhecida por sua inteligência e personalidade forte. Ela desafia padrões sociais enquanto busca independência e significado em suas relações.",
+    "especialidade": "Romance",
+    "cidade": "Lisboa",
+    "idade": 21,
+    "obras": ["Entre Razões e Emoções"]
+  },
+  {
+    "id": 4,
+    "nome": "Helena Duarte",
+    "foto": "https://placehold.co/300x300",
+    "descricao": "Estudante brilhante de magia com um forte senso de justiça.",
+    "biografia": "Helena é uma jovem aprendiz em uma escola de magia, destacando-se por sua inteligência e coragem. Ela luta para proteger seus amigos e equilibrar conhecimento com responsabilidade.",
+    "especialidade": "Magia",
+    "cidade": "Porto / Academia Arcana",
+    "idade": 16,
+    "obras": [
+      "Os Segredos da Academia",
+      "O Despertar dos Elementos"
+    ]
+  }
+]
 }
