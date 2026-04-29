@@ -7,7 +7,13 @@ import { useNavigate } from 'react-router' // para poder redirecionar a navegaç
 
 import axios from 'axios' // Para fazer requisição 
 
+// Contexto 
 import { useAuth } from '../../contexts/AuthContext' // Alterar estado do dado 
+
+// Modal 
+import Modal from '../Modal'
+
+import RegisterUser from '../RegisterUser'
 
 const LoginForm = () => {
   const [email, setEmail] = useState("")
@@ -16,6 +22,10 @@ const LoginForm = () => {
   const navigate = useNavigate()
 
   const { login } = useAuth() 
+
+  // Controle do modal 
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Validação de Login 
   const handleLogin = async(e) => {
@@ -83,6 +93,21 @@ const LoginForm = () => {
         </button>
         
       </form>
+
+      <div className='flex justify-between mt-4 text-sm'>
+        <button onClick={()=> toast.info('Funcionalidade em desenvolvimento')} className='text-blue-600 hover:underline cursor-pointer'>
+          Esqueceu a sua senha?
+        </button>
+
+        <button onClick={()=> setIsModalOpen(true)} className='text-blue-600 hover:underline cursor-pointer'>
+          Criar Conta
+        </button>
+      </div>
+
+      <Modal isOpen={isModalOpen} onClose={()=> setIsModalOpen(false)}>
+        <RegisterUser />
+      </Modal>
+
     </div>
   )
 }
