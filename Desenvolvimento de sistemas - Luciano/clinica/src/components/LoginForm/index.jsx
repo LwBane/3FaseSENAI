@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { toast } from 'react-toastify'
 
@@ -21,11 +21,19 @@ const LoginForm = () => {
 
   const navigate = useNavigate()
 
-  const { login } = useAuth() 
+  const { login, user } = useAuth() 
 
   // Controle do modal 
 
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  // Autenticação do usuário (verificação) 
+
+  useEffect(() => {
+    if(user) {
+      navigate('/dashboard')
+    }
+  }, [user, navigate])
 
   // Validação de Login 
   const handleLogin = async(e) => {
@@ -45,6 +53,9 @@ const LoginForm = () => {
         });
         return;
       }
+
+      login(email)
+
       toast.success('Login realizado com sucesso!', {
         autoClose:2000
       })

@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import { toast } from 'react-toastify'
+
+import axios from 'axios'
 
 const RegisterUser = () => {
 
@@ -15,7 +18,7 @@ const RegisterUser = () => {
     // Estados (match password e validação do botão de salvar)
     
     const [isPasswordMatch, setIsPasswordMatch] = useState(true) // esse controla os dois campos, pra ver se os dois estão exatamente iguais
-    const [isSaving, setItsSaving] = useState(false) // controla o estado, quando envia a requisição, etc... 
+    const [isSaving, setIsSaving] = useState(false) // controla o estado, quando envia a requisição, etc... 
 
     // Validação do Match 
 
@@ -36,16 +39,16 @@ const RegisterUser = () => {
             return
         }
 
-        setItsSaving(true)
+        setIsSaving(true)
 
         try{
             await axios.post('http://localhost:3000/users', {
                 email, password
             })
 
-            setItsSaving(false)
+            setIsSaving(false)
             resetForm()
-            toast.sucess("Usuário criado com sucesso!", {
+            toast.success("Usuário criado com sucesso!", {
                 autoClose: 2000, 
                 hideProgressBar: true
             })
@@ -55,14 +58,14 @@ const RegisterUser = () => {
                 autoClose: 2000, 
                 hideProgressBar: true
             })
-            setItsSaving(false)
+            setIsSaving(false)
         }
 
 
     }
 
     return (
-        <div className='w-full max-w-md p-6 bg white rounded-xl'>
+        <div className='w-full max-w-md p-6 bg-white rounded-xl'>
             <h2 className='text-2xl font-bold mb-6 text-center'>Criar Usuário</h2>
             <form onSubmit={handleSubmit}>
                 <fieldset>
