@@ -1,5 +1,6 @@
 import { Outlet } from "react-router" // Outlet funciona como um “placeholder” onde as rotas filhas vão ser renderizadas.
 import { useAuth } from "../contexts/AuthContext" // informação do seja bem vindo, @fulano
+import SideMenu from "../components/SideMenu"
 
 const DashboardLayout = () => {
     const { user, logout } = useAuth()
@@ -8,7 +9,9 @@ const DashboardLayout = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
         {/* barra lateral */}
-        <h1>Menu fixo lateral</h1>
+
+
+        <SideMenu />
 
         {/* Conteúdo principal */}
         <main className="flex-1 flex flex-col">
