@@ -3,40 +3,130 @@
     {
       "id": "1",
       "email": "joao@email.com",
-      "password": "1234abcd"
+      "password": "abcd1234"
     },
     {
-      "email": "joao3@gmail.com",
-      "password": "1234abcd",
-      "id": "o2ZgjHdmx2w"
+      "id": "2",
+      "email": "luciano@gmail.com",
+      "password": "abcd1234"
     },
     {
-      "email": "joao4@gmail.com",
-      "password": "1234abcd",
-      "id": "-jzE6qvJCZw"
+      "email": "luciano2@gmail.com",
+      "password": "abcd1234",
+      "id": "AcVR7AkgHGw"
+    },
+    {
+      "email": "luciano3@gmail.com",
+      "password": "asdf1234",
+      "id": "GBMuy9BRnQc"
+    },
+    {
+      "email": "toast@gmail.com",
+      "password": "123456789",
+      "id": "mSCLd3g_0l0"
+    },
+    {
+      "email": "toast2@gmail.com",
+      "password": "123456789",
+      "id": "z2c2T-3Ku4Y"
+    },
+    {
+      "email": "toast3@gmail.com",
+      "password": "abcd1234",
+      "id": "d7b6vQCk3yk"
+    },
+    {
+      "email": "toast4@gmail.com",
+      "password": "abcd1234",
+      "id": "U31TL-kGzfM"
+    },
+    {
+      "email": "teste1@gm",
+      "password": "abcd1234",
+      "id": "MdEjQyOMDJM"
+    },
+    {
+      "email": "teste12@gm",
+      "password": "abcd12345",
+      "id": "fvJ-XdYjb-s"
     }
   ],
-
   "patients": [
     {
-      "id":"1",
+      "id": "1",
       "fullName": "João da Silva",
       "gender": "Masculino",
       "birthdate": "11/12/1980",
-      "cpf": "123.456.789.01",
-      "rg": "123.456.789.01",
+      "cpf": "958.858.858-88",
+      "rg": "958.858.858-88",
       "maritalStatus": "solteiro",
-      "phone": "(48) 111111111",
-      "email": "joao@gmail.com",
+      "phone": "(48)85544-5955",
+      "email": "joao@email.com",
       "birthplace": "Florianópolis",
-      "emergencyContact": "(48) 111111111",
+      "emergencyContact": "(48)85544-5955",
       "allergies": "A,B",
-      "specialCare": "Cuidado A",
+      "specialCare": "cuidado A",
       "healthInsurance": "unimed",
       "insuranceNumber": "22121",
       "insuranceValidity": "15/01/2027",
-      "addres": {
-        "cep": "88080-000",
+      "address": {
+        "cep": "88000-000",
+        "city": "Florianópolis",
+        "state": "SC",
+        "street": "Rua X",
+        "number": "30",
+        "complement": "casa",
+        "neighborhood": "centro",
+        "reference": "muro branco"
+      }
+    },
+    {
+      "id": "2",
+      "fullName": "Maria",
+      "gender": "Masculino",
+      "birthdate": "11/12/1980",
+      "cpf": "958.858.858-88",
+      "rg": "958.858.858-88",
+      "maritalStatus": "solteiro",
+      "phone": "(48)85544-5955",
+      "email": "joao@email.com",
+      "birthplace": "Florianópolis",
+      "emergencyContact": "(48)85544-5955",
+      "allergies": "A,B",
+      "specialCare": "cuidado A",
+      "healthInsurance": "unimed",
+      "insuranceNumber": "22121",
+      "insuranceValidity": "15/01/2027",
+      "address": {
+        "cep": "88000-000",
+        "city": "Florianópolis",
+        "state": "SC",
+        "street": "Rua X",
+        "number": "30",
+        "complement": "casa",
+        "neighborhood": "centro",
+        "reference": "muro branco"
+      }
+    },
+     {
+      "id": "3",
+      "fullName": "Sofia",
+      "gender": "Masculino",
+      "birthdate": "11/12/1980",
+      "cpf": "958.858.858-88",
+      "rg": "958.858.858-88",
+      "maritalStatus": "solteiro",
+      "phone": "(48)85544-5955",
+      "email": "joao@email.com",
+      "birthplace": "Florianópolis",
+      "emergencyContact": "(48)85544-5955",
+      "allergies": "A,B",
+      "specialCare": "cuidado A",
+      "healthInsurance": "unimed",
+      "insuranceNumber": "22121",
+      "insuranceValidity": "15/01/2027",
+      "address": {
+        "cep": "88000-000",
         "city": "Florianópolis",
         "state": "SC",
         "street": "Rua X",
@@ -46,5 +136,60 @@
         "reference": "muro branco"
       }
     }
-  ]
+  ],
+  "consults": [
+    {
+      "patientId": "2",
+      "reason": "Resfriado",
+      "date": "20-03-2026",
+      "time": "15:30",
+      "description": "Lorem Ipsum",
+      "medication": "Lorem Ipsum",
+      "dosagePrecautions": "Lorem Ipsum",
+      "id": "1"
+    },
+      {
+      "patientId": "1",
+      "reason": "Resfriado",
+      "date": "20-03-2026",
+      "time": "15:30",
+      "description": "Lorem Ipsum",
+      "medication": "Lorem Ipsum",
+      "dosagePrecautions": "Lorem Ipsum",
+      "id": "2"
+    }
+  ],
+  "exams": [
+    {
+      "name": "Lorem",
+      "date": "12-07-2025",
+      "time": "15:20",
+      "type": "Lorem",
+      "laboratory": "Lorem",
+      "documentUrl": "https://docexemplo.com",
+      "results": "Lorem",
+      "id": "1"
+    },
+     {
+      "name": "Lorem",
+      "date": "12-07-2025",
+      "time": "15:20",
+      "type": "Lorem",
+      "laboratory": "Lorem",
+      "documentUrl": "https://docexemplo.com",
+      "results": "Lorem",
+      "id": "2"
+    },
+    {
+      "name": "Lorem",
+      "date": "12-07-2025",
+      "time": "15:20",
+      "type": "Lorem",
+      "laboratory": "Lorem",
+      "documentUrl": "https://docexemplo.com",
+      "results": "Lorem",
+      "id": "3"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
