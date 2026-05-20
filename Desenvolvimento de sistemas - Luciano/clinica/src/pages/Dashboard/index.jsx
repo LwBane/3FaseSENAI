@@ -2,6 +2,7 @@
 import PatientsCounter from '../../components/counters/PatientsCounter'
 import ConsultCounter from '../../components/counters/ConsultCounter'
 import ExamCounter from '../../components/counters/ExamCounter'
+import PatientsList from '../../components/PatientsList'
 
 const Dashboard = () => {
   return (
@@ -16,14 +17,9 @@ const Dashboard = () => {
         <ExamCounter />
       </div>
 
-      {/* Lista de pacientes
-      <h2>Lista de pacientes</h2> */}
-
-      {/* Lista de consultas
-      <h2>Lista de consultas</h2> */}
-
-      {/* Lista de exames
-      <h2>Lista de exames</h2> */}
+      {/* Lista de pacientes */}
+      <PatientsList />
+     
     </div>
   )
 }
