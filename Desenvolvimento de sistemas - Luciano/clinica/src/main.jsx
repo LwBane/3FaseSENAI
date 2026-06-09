@@ -7,14 +7,15 @@ import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
 
 // ==> Toastify
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import DashboardLayout from './layouts/DashboardLayout';
+import MedicalRecordList from './components/MedicalRecordList';
+
 
 const router = createBrowserRouter([
   {
@@ -22,16 +23,17 @@ const router = createBrowserRouter([
     element: <Login />
   },
   {
-    path: "/dashboard",
+
     element: (
       <PrivateRoute>
         <DashboardLayout />
       </PrivateRoute>
-    ), 
+    ),
     children: [
-        {path: "/dashboard", element: <Dashboard />}
+      { path: "/dashboard", element: <Dashboard /> },
+      { path: "/prontuarios", element: <MedicalRecordList/> },
     ]
-  },
+  }
 ]);
 
 createRoot(document.getElementById('root')).render(
@@ -40,5 +42,5 @@ createRoot(document.getElementById('root')).render(
       <ToastContainer />
       <RouterProvider router={router} />
     </AuthProvider>
-  </StrictMode>
+  </StrictMode>,
 )
