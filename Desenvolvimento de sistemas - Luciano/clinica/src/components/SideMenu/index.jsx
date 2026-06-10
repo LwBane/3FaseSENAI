@@ -33,7 +33,7 @@ const SideMenu = () => {
     const toggleMenu = () => {
         setIsCollapsed(!isCollapsed) // Para que o botão tenha a mesma funcionalidade, aqui eu estou criando uma interação dinâmica, pode ser tanto true como false
     }
-}
+
 
 return (
     <aside
@@ -145,6 +145,6 @@ return (
 
     </aside > // aside é uma tag de semântica para criar coisas laterais
 )
-
+}
 
 export default SideMenu
