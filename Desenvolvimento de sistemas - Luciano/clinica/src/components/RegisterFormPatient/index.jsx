@@ -40,7 +40,7 @@ function RegisterFormPatient() {
         setFormData((prev) => ({ ...prev, [name]: value })) // Operador Spread & Propriedade Computada 
     }
 
-    const handleAdressChange = (e) => {
+    const handleAddressChange = (e) => {
         const { name, value } = e.target
         setFormData((prev) => ({
             ...prev,
@@ -50,13 +50,13 @@ function RegisterFormPatient() {
 
     // Requisição para API viacep 
 
-    const fetchAdressData = async (cep) => {
+    const fetchAddressData = async (cep) => {
         try {
             const { data } = await axios.get(`https://viacep.com.br/ws/${cep}/json`)
             setFormData((prev) => ({
                 ...prev,
                 address: {
-                    ...prev.adress, // Preserva se alguém ja preencheu algo 
+                    ...prev.address, // Preserva se alguém ja preencheu algo 
                     cep: data.cep || "",
                     city: data.localidade || "",
                     state: data.uf || "",
@@ -74,7 +74,7 @@ function RegisterFormPatient() {
 
     const handleCepBlur = (e) => {
         const cep = e.target.value.replace(/\D/g, "")
-        if (cep.length === 8) fetchAdressData(cep)
+        if (cep.length === 8) fetchAddressData(cep)
     }
 
     // Submit form 
@@ -131,9 +131,51 @@ function RegisterFormPatient() {
 
 
     return (
-        <div>
-            RegisterFormPatient
-        </div>
+        <form
+            onSubmit={handleSubmit}
+            className='space-y-6 text-gray-800'
+            autoComplete='off'
+        >
+
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                {/* Nome completo */}
+                <fieldset>
+                    <label htmlFor='fullName' className='block text-sm font-medium mb-1'>Nome Completo</label>
+                    <input
+                        type='text'
+                        name='fullName'
+                        id='fullName'
+                        value={formData.fullName}
+                        onChange={handleInputChange}
+                        required
+                        className='w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none'
+                    />
+                </fieldset>
+
+                <fieldset>
+
+
+                    <label htmlFor='gender' className='block text-sm font-medium mb-1'>Gênero</label>
+
+                    <select
+                        name='gender'
+                        value={formData.gender}
+                        onChange={handleInputChange}
+                        required
+                        className='w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none'
+                    >
+                        <option value="">Selecione</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                        <option value="outro">Outro</option>
+
+
+                    </select>
+
+                </fieldset>
+
+            </div>
+        </form>
     )
 }
 
