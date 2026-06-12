@@ -462,6 +462,8 @@ function RegisterFormPatient() {
                     />
                 </fieldset>
 
+                </div>
+
                 {/* Botão de envio **TAL DA MELHORIA??*/}
                 <div className='flex justify-end gap-3 pt-4'>
                     <button
@@ -472,8 +474,7 @@ function RegisterFormPatient() {
                         {isSaving ? "Salvando..." : "Salvar"}
                     </button>
                 </div>
-
-            </div>
+                
 
 
         </form>
