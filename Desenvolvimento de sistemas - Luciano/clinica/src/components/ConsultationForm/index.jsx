@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
-// Modal 
+//modal
+
 import Modal from '../Modal'
+
+
 
 function ConsultationForm() {
     const [searchTerm, setSearchTerm] = useState("")
@@ -13,16 +16,16 @@ function ConsultationForm() {
     const [isSaving, setIsSaving] = useState(false)
 
     const [formData, setFormData] = useState({
-        reason: " ",
-        date: " ",
-        time: " ",
-        description: " ",
-        medication: " ",
-        dosagePrecautions: " ",
+        reason: "",
+        date: "",
+        time: "",
+        description: "",
+        medication: "",
+        dosagePrecautions: "",
     })
 
 
-    // Busca pacientes 
+    // busca pacientes
 
     useEffect(() => {
         const fetchPatients = async () => {
@@ -33,46 +36,46 @@ function ConsultationForm() {
                 console.error("Erro ao obter dados dos pacientes", error)
             }
         }
+        fetchPatients()
     }, [])
 
-    // ===== Funções Auxiliares ====== 
 
-    // Controle do campo de filtro 
+    // funções auxiliares
+
+    //controle do campo de filtro
 
     const handleSearchChange = (e) => setSearchTerm(e.target.value)
 
-    // Filtro dos pacientes 
+    //filtro dos pacientes
 
     const filteredPatients = patients.filter(
         (patient) =>
             patient.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
             patient.id.toString().includes(searchTerm)
-    );
+    )
 
-    // Seleciona o paciente e abre modal 
+    //seleciona o paciente  e abre modal
 
     const handleSelectPatient = (patient) => {
         setSelectedPatient(patient)
         setIsModalOpen(true)
     }
 
-    // Fecha modal e reseta o valor do paciente selecionado
+    //fecha modal e reseta o valor do paciente selecionado
 
     const handleCloseModal = () => {
         setIsModalOpen(false)
         setSelectedPatient(null)
     }
 
-
-    // Controla os campos do estado formData dinamicamente 
+    //Controla os campos do estado formData dinamicamente
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
         setFormData((prev) => ({ ...prev, [name]: value }))
     }
 
-
-    // Reseta o form 
+    //reseta o form
 
     const resetForm = () => {
         setFormData({
@@ -85,7 +88,7 @@ function ConsultationForm() {
         })
     }
 
-    // Envia os dados 
+    //envia os dados
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -101,7 +104,7 @@ function ConsultationForm() {
 
             await axios.post("http://localhost:3000/consults", dataToSave)
 
-            toast.success("Consulta cadastrada com sucesso", {
+            toast.success("Consulta cadastrada com sucesso!", {
                 autoClose: 2000,
                 hideProgressBar: true
             })
@@ -118,9 +121,11 @@ function ConsultationForm() {
         }
     }
 
+
+
     return (
         <section className='p-6 text-gray-800'>
-            {/* Campo de busca */}
+            {/* campo de busca */}
 
             <div className='mb-6'>
                 <label className='block text-sm font-semibold mb-2'>
@@ -133,6 +138,7 @@ function ConsultationForm() {
                     placeholder='Digite o nome ou o registro do paciente'
                     className='w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none'
                 />
+
             </div>
 
             {/* Lista de pacientes */}
@@ -142,7 +148,7 @@ function ConsultationForm() {
                     filteredPatients.map((patient) => (
                         <li
                             key={patient.id}
-                            className='p-4 border rounded-lg shadow-sm flex justify-between items-center hover:bg-gray-500 transition'
+                            className='p-4 border rounded-lg shadow-sm flex justify-between items-center hover:bg-gray-50 transition'
                         >
                             <div>
                                 <p className='text-sm'>
@@ -151,9 +157,11 @@ function ConsultationForm() {
                                 <p className='text-sm'>
                                     <strong>Nome:</strong> {patient.fullName}
                                 </p>
+
                                 <p className='text-sm'>
                                     <strong>Convênio:</strong> {patient.healthInsurance}
                                 </p>
+
                             </div>
 
                             <button
@@ -168,6 +176,7 @@ function ConsultationForm() {
                 }
             </ul>
 
+
             {/* Modal de cadastro de consulta */}
 
             <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
@@ -176,7 +185,7 @@ function ConsultationForm() {
                         <>
                             {/* Título */}
                             <h2 className='text-lg font-bold mb-4 text-cyan-700'>
-                                Cadastrar consulta pra {selectedPatient.fullName}
+                                Cadastrar consulta para {selectedPatient.fullName}
                             </h2>
 
                             {/* Dados básicos */}
@@ -192,9 +201,9 @@ function ConsultationForm() {
                             {/* Formulário */}
 
                             <form onSubmit={handleSubmit} className='space-y-4'>
-                                {/* Motivo da consulta */}
+                                {/* motivo da consulta */}
                                 <div>
-                                    <label className='block text-sm font-medium mb-1'>
+                                    <label htmlFor='reason' className='block text-sm font-medium mb-1'>
                                         Motivo da Consulta
                                     </label>
 
@@ -210,11 +219,122 @@ function ConsultationForm() {
                                 </div>
 
                                 <div className='grid grid-cols-2 gap-4'>
+                                    {/* data */}
+                                    <div>
+                                        <label htmlFor='date' className='block text-sm font-medium mb-1'>
+                                            Data
+                                        </label>
+
+                                        <input
+                                            type='date'
+                                            name='date'
+                                            id='date'
+                                            value={formData.date}
+                                            onChange={handleInputChange}
+                                            required
+                                            className='w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none'
+                                        />
+                                    </div>
+                                    {/* Hora */}
+                                    <div>
+                                        <label htmlFor='time' className='block text-sm font-medium mb-1'>
+                                            Horário
+                                        </label>
+
+                                        <input
+                                            type='time'
+                                            name='time'
+                                            id='time'
+                                            value={formData.time}
+                                            onChange={handleInputChange}
+                                            required
+                                            className='w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none'
+                                        />
+                                    </div>
+
+                                </div> {/* fechamento do grid*/}
+
+                                {/* Descrição do problema */}
+
+                                <div>
+                                    <label htmlFor='description' className='block text-sm font-medium mb-1'>
+                                        Descrição do problema
+                                    </label>
+
+                                    <textarea
+                                        name='description'
+                                        id='description'
+                                        value={formData.description}
+                                        rows={3}
+                                        onChange={handleInputChange}
+                                        required
+                                        className='w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none resize-none'
+                                    />
+                                </div>
+
+                                {/* Medicação receitada */}
+
+                                <div>
+                                    <label htmlFor='medication' className='block text-sm font-medium mb-1'>
+                                        Medicação receitada
+                                    </label>
+
+                                    <input
+                                        type='text'
+                                        name='medication'
+                                        id='medication'
+                                        value={formData.medication}
+                                        onChange={handleInputChange}
+                                        required
+                                        className='w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none'
+                                    />
                                 </div>
 
 
-                            </form>
+                                {/* Dosagem e Precauções */}
 
+                                <div>
+                                    <label htmlFor='dosagePrecautions' className='block text-sm font-medium mb-1'>
+                                        Dosagem e Precauções
+                                    </label>
+
+                                    <input
+                                        type='text'
+                                        name='dosagePrecautions'
+                                        id='dosagePrecautions'
+                                        value={formData.dosagePrecautions}
+                                        onChange={handleInputChange}
+                                        required
+                                        className='w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none'
+                                    />
+                                </div>
+
+                                {/* botões */}
+
+                                <div className='flex justify-end gap-3 pt-4'>
+                                    <button
+                                        type='button'
+                                        onClick={handleCloseModal}
+                                        className='px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition'
+                                    >
+                                        Fechar
+                                    </button>
+
+
+                                    <button
+                                        type='submit'
+                                        disabled={isSaving}
+                                        className='px-4 py-2 bg-cyan-700 text-white rounded-lg hover:bg-cyan-600 disabled:opacity-50 transition'
+                                    >
+                                        {isSaving ? "Salvando..." : "Salvar"}
+                                    </button>
+
+
+                                </div>
+
+
+
+                            </form>
                         </>
                     )
                 }
@@ -224,7 +344,4 @@ function ConsultationForm() {
     )
 }
 
-
-
 export default ConsultationForm
-

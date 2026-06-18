@@ -35,11 +35,11 @@ function RegisterFormPatient() {
 
     const [isSaving, setIsSaving] = useState(false)
 
-    // === Handles === 
+    // handles
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
-        setFormData((prev) => ({ ...prev, [name]: value })) // Operador Spread & Propriedade Computada 
+        setFormData((prev) => ({ ...prev, [name]: value })) //operador spread e propriedade computada
     }
 
     const handleAddressChange = (e) => {
@@ -47,10 +47,10 @@ function RegisterFormPatient() {
         setFormData((prev) => ({
             ...prev,
             address: { ...prev.address, [name]: value }
-        }))
+        })) //operador spread e propriedade computada
     }
 
-    // Requisição para API viacep 
+    // requisição para api viacep 
 
     const fetchAddressData = async (cep) => {
         try {
@@ -58,7 +58,7 @@ function RegisterFormPatient() {
             setFormData((prev) => ({
                 ...prev,
                 address: {
-                    ...prev.address, // Preserva se alguém ja preencheu algo 
+                    ...prev.address,
                     cep: data.cep || "",
                     city: data.localidade || "",
                     state: data.uf || "",
@@ -67,27 +67,72 @@ function RegisterFormPatient() {
                     neighborhood: data.bairro || ""
                 }
             }))
+
         } catch (error) {
             console.log("Erro ao buscar endereço", error)
         }
     }
 
-    // == Tratamento do valor digitado no campo de CEP 
+    // tratamento do valor digitado no campo de cep
 
     const handleCepBlur = (e) => {
         const cep = e.target.value.replace(/\D/g, "")
         if (cep.length === 8) fetchAddressData(cep)
+
     }
 
-    // Submit form 
+
+    //validação da data de nascimento
+
+    const yesterday = new Date() // retorna nesse exemplo => Mon Jun 15 2026 14:30:00 GMT-0300
+    yesterday.setDate(yesterday.getDate() - 1) // retorna o dia atual menos um (ontem)
+
+    //toISOString retorna uma string no formato 2026-06-14T17:30:00.000Z
+    /*
+    2026-06-14 → data
+    T → separador
+    17:30:00.000Z → horário UTC
+    */
+
+    /*
+    .split("T")[0]
+    separa a string no caractere T
+    E pega a primeira parte do do índice devolvido, no caso "2026-06-14"
+
+    <input
+        type="date"
+        max="2026-06-14"
+    />
+
+    */
+
+
+    const maxBirthDate = yesterday.toISOString().split("T")[0]
+
+    //submit form
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        // const selectedDate = new Date(formData.birthdate)
+
+        // const today = new Date()
+        // today.setHours(0, 0, 0, 0)
+
+        // if (selectedDate >= today) {
+        //     toast.error("A data de nascimento deve ser anterior à data atual.", {
+        //         autoClose: 2000,
+        //         hideProgressBar: true
+        //     })
+        //     return
+        // }
+
+
+
         setIsSaving(true)
 
         try {
-            await axios.post(
-                "http://localhost:3000/patients", formData)
+            await axios.post("http://localhost:3000/patients", formData)
 
             toast.success("Paciente cadastrado com sucesso!", {
                 autoClose: 2000,
@@ -124,7 +169,7 @@ function RegisterFormPatient() {
 
         } catch (error) {
             console.error(error)
-            toast.error("Erro ao salvar os dados!", {
+            toast.error("Erro ao Salvar os dados!", {
                 autoClose: 2000,
                 hideProgressBar: true
             })
@@ -138,8 +183,8 @@ function RegisterFormPatient() {
             className='space-y-6 text-gray-800'
             autoComplete='off'
         >
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
 
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                 {/* Nome completo */}
                 <fieldset>
                     <label htmlFor='fullName' className='block text-sm font-medium mb-1'>Nome Completo</label>
@@ -154,9 +199,12 @@ function RegisterFormPatient() {
                     />
                 </fieldset>
 
-                {/* Gênero */}
+                {/* gênero */}
+
                 <fieldset>
+
                     <label htmlFor='gender' className='block text-sm font-medium mb-1'>Gênero</label>
+
                     <select
                         name='gender'
                         value={formData.gender}
@@ -168,40 +216,46 @@ function RegisterFormPatient() {
                         <option value="masculino">Masculino</option>
                         <option value="feminino">Feminino</option>
                         <option value="outro">Outro</option>
+
                     </select>
+
                 </fieldset>
+
 
                 {/* Data de nascimento */}
                 <fieldset>
-                    <label htmlFor='birthdate' className='block text-sm font-medium mb-1'>Data de nascimento</label>
+                    <label htmlFor='birthdate' className='block text-sm font-medium mb-1'>Data de Nascimento</label>
                     <input
                         type='date'
                         name='birthdate'
                         id='birthdate'
                         value={formData.birthdate}
                         onChange={handleInputChange}
+                        max={maxBirthDate}
                         required
                         className='w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none'
                     />
                 </fieldset>
 
+
                 {/* CPF */}
                 <fieldset>
                     <label htmlFor='cpf' className='block text-sm font-medium mb-1'>CPF</label>
                     <IMaskInput
-                        mask="000.000.000-00" // Máscara de entrada: formato pré definido
-                        name="cpf"
+                        mask="000.000.000-00"
+                        name='cpf'
                         minLength={14}
-                        id="cpf"
+                        id='cpf'
                         value={formData.cpf}
                         onAccept={(value) => setFormData((prev) => ({ ...prev, cpf: value }))}
                         className='w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none'
                     />
                 </fieldset>
 
+
                 {/* RG */}
                 <fieldset>
-                    <label htmlFor='rg' className='block text-sm font-medium mb-1'>RG</label>
+                    <label htmlFor='rg' className='block text-sm font-medium mb-1'>RG:</label>
                     <input
                         type='text'
                         name='rg'
@@ -213,9 +267,13 @@ function RegisterFormPatient() {
                     />
                 </fieldset>
 
-                {/* Estado civil */}
+
+                {/* Estado Civil */}
+
                 <fieldset>
+
                     <label htmlFor='maritalStatus' className='block text-sm font-medium mb-1'>Estado Civil</label>
+
                     <select
                         name='maritalStatus'
                         value={formData.maritalStatus}
@@ -228,38 +286,43 @@ function RegisterFormPatient() {
                         <option value="casado(a)">Casado(a)</option>
                         <option value="divorciado(a)">Divorciado(a)</option>
                         <option value="viuvo(a)">Viúvo(a)</option>
+
                     </select>
+
                 </fieldset>
 
-                {/* Telefone */}
+
+                {/* telefone */}
                 <fieldset>
                     <label htmlFor='phone' className='block text-sm font-medium mb-1'>Telefone</label>
                     <IMaskInput
                         mask="(00) 00000-0000"
-                        name="phone"
-                        id="phone"
+                        name='phone'
+                        id='phone'
                         value={formData.phone}
                         onAccept={(value) => setFormData((prev) => ({ ...prev, phone: value }))}
                         className='w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none'
                     />
                 </fieldset>
 
-                {/* Contato de emergêcia */}
+
+                {/* contato de emergência */}
                 <fieldset>
-                    <label htmlFor='emergencyContact' className='block text-sm font-medium mb-1'>Contato de emergêcia</label>
+                    <label htmlFor='emergencyContact' className='block text-sm font-medium mb-1'>Contato de Emergência</label>
                     <IMaskInput
                         mask="(00) 00000-0000"
-                        name="emergencyContact"
-                        id="emergencyContact"
+                        name='emergencyContact'
+                        id='emergencyContact'
                         value={formData.emergencyContact}
                         onAccept={(value) => setFormData((prev) => ({ ...prev, emergencyContact: value }))}
                         className='w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none'
                     />
                 </fieldset>
 
-                {/* E-mail */}
+
+                {/* Email */}
                 <fieldset>
-                    <label htmlFor='email' className='block text-sm font-medium mb-1'>Email</label>
+                    <label htmlFor='email' className='block text-sm font-medium mb-1'>Email:</label>
                     <input
                         type='email'
                         name='email'
@@ -270,6 +333,7 @@ function RegisterFormPatient() {
                         className='w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none'
                     />
                 </fieldset>
+
 
                 {/* Naturalidade */}
                 <fieldset>
@@ -364,11 +428,12 @@ function RegisterFormPatient() {
                         name='cep'
                         id='cep'
                         value={formData.address.cep}
-                        onAccept={(value) => handleAddressChange({ target: { name: "cep", value } })}
                         onBlur={handleCepBlur}
+                        onAccept={(value) => handleAddressChange({ target: { name: "cep", value } })}
                         className='w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none'
                     />
                 </fieldset>
+
 
                 {/* Rua */}
                 <fieldset>
@@ -383,6 +448,7 @@ function RegisterFormPatient() {
                     />
                 </fieldset>
 
+
                 {/* Número */}
                 <fieldset>
                     <label htmlFor='number' className='block text-sm font-medium mb-1'>Número</label>
@@ -395,6 +461,7 @@ function RegisterFormPatient() {
                         className='w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none'
                     />
                 </fieldset>
+
 
                 {/* Complemento */}
                 <fieldset>
@@ -409,6 +476,8 @@ function RegisterFormPatient() {
                     />
                 </fieldset>
 
+
+
                 {/* Referência */}
                 <fieldset>
                     <label htmlFor='reference' className='block text-sm font-medium mb-1'>Referência</label>
@@ -421,6 +490,7 @@ function RegisterFormPatient() {
                         className='w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none'
                     />
                 </fieldset>
+
 
                 {/* Bairro */}
                 <fieldset>
@@ -448,6 +518,7 @@ function RegisterFormPatient() {
                     />
                 </fieldset>
 
+
                 {/* Estado */}
                 <fieldset>
                     <label htmlFor='state' className='block text-sm font-medium mb-1'>Estado</label>
@@ -462,22 +533,23 @@ function RegisterFormPatient() {
                     />
                 </fieldset>
 
-                </div>
+            </div >
 
-                {/* Botão de envio **TAL DA MELHORIA??*/}
-                <div className='flex justify-end gap-3 pt-4'>
-                    <button
-                        type='submit'
-                        disabled={isSaving}
-                        className='px-4 py-2 bg-cyan-700 text-white rounded-lg hover:bg-cyan-600 disabled:opacity-50'
-                    >
-                        {isSaving ? "Salvando..." : "Salvar"}
-                    </button>
-                </div>
-                
+            {/* botão de envio */}
+
+            < div className='flex justify-end gap-3 pt-4' >
+                <button
+                    type='submit'
+                    disabled={isSaving}
+                    className='px-4 py-2 bg-cyan-700 text-white rounded-lg hover:bg-cyan-600 disabled:opacity-50'
+                >
+                    {isSaving ? "Salvando..." : "Salvar"}
+
+                </button>
+            </div >
 
 
-        </form>
+        </form >
     )
 }
 
