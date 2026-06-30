@@ -19,12 +19,12 @@ const PatientsCounter = () => {
     }, [])
 
     return (
-        <div className='bg-white shadow rounded-lg p-6 flex flex-col items-center w-60'>
-            <h2 className='text-xl font-bold flex items-center gap-2'>
-                <FaHospitalUser className='text-blue-600' />
+        <div className='bg-white dark:bg-gray-900 shadow rounded-lg p-6 flex flex-col items-center w-60'>
+            <h2 className='text-xl font-bold flex items-center gap-2 dark:text-gray-200'>
+                <FaHospitalUser className='text-blue-600 dark:text-blue-400' />
                 {patientCounter}
             </h2>
-            <p className='text-grey-600 mt-2'>Pacientes</p>
+            <p className='text-grey-600 dark:text-gray-400 mt-2'>Pacientes</p>
         </div>
     )
 }

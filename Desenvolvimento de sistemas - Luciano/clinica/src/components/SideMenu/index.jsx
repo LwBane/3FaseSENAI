@@ -3,7 +3,9 @@ import {
     MdDashboard,
     MdExitToApp,
     MdMenu,
-    MdClose
+    MdClose,
+    MdLightMode,
+    MdDarkMode
 } from 'react-icons/md'
 
 import {
@@ -13,12 +15,14 @@ import {
 } from 'react-icons/fa'
 
 import { useAuth } from '../../contexts/AuthContext'
+import { useTheme } from '../../contexts/ThemeContext'
 import { useState } from 'react'
 
 const SideMenu = () => {
     const navigate = useNavigate()
 
     const { logout } = useAuth()
+    const { theme, toggleTheme } = useTheme()
 
     // Controle do menu sanfonado
     const [isCollapsed, setIsCollapsed] = useState(false)
@@ -37,11 +41,11 @@ const SideMenu = () => {
 
 return (
     <aside
-        className={`h-screen bg-cyan-800 text-white flex flex-col justify-between transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'
+        className={`h-screen bg-cyan-800 dark:bg-gray-900 text-white flex flex-col justify-between transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'
             }`}
     >
         {/* topo - botão toggle */}
-        <div className='p-4 flex items-center justify-between border-b border-cyan-700'>
+        <div className='p-4 flex items-center justify-between border-b border-cyan-700 dark:border-gray-700'>
             {
                 !isCollapsed && (
                     <h1 className='text-lg font-bold'>Clínica +</h1>
@@ -131,8 +135,16 @@ return (
             </ul>
         </nav>
 
-        {/* botao sair */}
-        <div className='p-4 border-t border-cyan-700'>
+        {/* botao dark mode + sair */}
+        <div className='p-4 border-t border-cyan-700 dark:border-gray-700 space-y-3'>
+            <button
+                onClick={toggleTheme}
+                className='flex items-center gap-3 text-white hover:text-cyan-300 w-full cursor-pointer'
+            >
+                {theme === 'dark' ? <MdLightMode size={20} /> : <MdDarkMode size={20} />}
+                {!isCollapsed && <span>{theme === 'dark' ? 'Modo Claro' : 'Modo Escuro'}</span>}
+            </button>
+
             <button
                 onClick={handleLogout}
                 className='flex items-center gap-3 text-red-300 hover:text-red-500 w-full cursor-pointer'
